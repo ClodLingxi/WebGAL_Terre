@@ -69,7 +69,6 @@ export default function GraphicalEditor(props: IGraphicalEditorProps) {
       const firstTabElement = searchElement.querySelector("[tabindex]");
       if (firstTabElement instanceof HTMLElement) {
         firstTabElement.focus();
-        firstTabElement.scrollIntoView?.({behavior: 'auto'});
       }
     }
   }
@@ -81,7 +80,7 @@ export default function GraphicalEditor(props: IGraphicalEditorProps) {
     const showSentenceList = [...showSentence.value];
     showSentenceList.splice(updateIndex, 0, true);
     showSentence.set(showSentenceList);
-    setTimeout(() => {focusOneSentence(updateIndex);}, 0);
+    focusOneSentence(updateIndex);
   }
 
   function deleteOneSentence(index: number) {
@@ -203,7 +202,7 @@ export default function GraphicalEditor(props: IGraphicalEditorProps) {
                   draggableId={sentence.content + sentence.commandRaw + i} index={i}>
                   {(provided, snapshot) => (
                     <div className={`${styles.sentenceEditorWrapper} sentence-block-${index}`} onKeyDown={handleSentenceKeyDown}
-                      key={"Inner Draggable:" + i.toString()}
+                      key={sentence.commandRaw + JSON.stringify(sentence.sentenceAssets) + i + 'inner'}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                     >
