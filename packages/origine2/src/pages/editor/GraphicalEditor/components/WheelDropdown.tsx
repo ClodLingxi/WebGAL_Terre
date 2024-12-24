@@ -26,6 +26,7 @@ export default function WheelDropdown({
 
   const handleWheel = useCallback(
     (event: WheelEvent) => {
+      return;
       event.preventDefault();
       event.stopPropagation();
       // TODO 这个特性容易误触
